@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title')->nullable(false);
             $table->text('content')->nullable(false);
             $table->string('picture_path')->nullable();
-            $table->integer('likes')->default(0);
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
             $table->softdeletes();
