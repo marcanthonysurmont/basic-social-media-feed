@@ -28,7 +28,11 @@
                 @endguest
 
                 @auth
-                    <form method="POST" action="{{ route('logout') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out'">
+                    <div class="inline-flex items-center px-1 pt-1 text-base font-medium  dark:text-gray-200 border-b-2 border-transparent ml-3">{{ Auth::user()->name }}</div>
+                    <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                        {{ __('Profile') }}
+                    </x-nav-link>
+                    <form method="POST" action="{{ route('logout') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-base font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out ml-3">
                         @csrf
                         <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
                             {{ __('Log Out') }}
