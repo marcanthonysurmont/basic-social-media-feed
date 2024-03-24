@@ -16,6 +16,20 @@ class PostController extends Controller
         return view('/post', compact('submitButton'));
     }
 
+    public function status(int $id)
+    {
+        try
+        {
+            $post = Post::findOrFail($id);
+        }catch (ModelNotFoundException $e)
+        {
+            redirect('/')->with('error', 'Post not found');
+        }
+
+        return view('/status', ['post' => $post]);
+    }
+
+
     function store(Request $request)
     {
         $request->validate([
