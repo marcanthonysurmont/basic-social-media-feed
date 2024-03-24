@@ -7,8 +7,8 @@
             <p class="text-sm font-semibold text-gray-400 mb-2">{{$post->user->name}}</p>
             <h2 class="text-xl font-semibold mb-2">{{$post->title}}</h2>
         </div>
-        @if(!empty($post->picture_path))
-            <img src="https://via.placeholder.com/800x400" alt="Post Image" class="w-full h-auto mb-6">
+        @if(!empty($post->file_path))
+            <img src="{{asset('storage/' . $post->file_path)}}" alt="{{$post->title}}" class="w-full h-auto mb-6">
         @endif
     </a>
     <div class="p-6 lg:pt-0 flex">
