@@ -15,6 +15,11 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-nav-link>
+                    @auth
+                        <x-nav-link :href="route('create-post')" :active="request()->routeIs('create-post')">
+                            {{ __('Create post') }}
+                        </x-nav-link>
+                    @endauth
                 </div>
             </div>
             <div class="hidden sm:flex justify-end">
