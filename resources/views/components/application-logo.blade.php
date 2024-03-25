@@ -5,9 +5,9 @@
         fill: none;
         font-family: VeniteAdoremusStraight, 'Venite Adoremus Straight';
         font-size: 335px;
-        stroke: #fff;
+        stroke: #000;
         stroke-miterlimit: 10;
-        stroke-width: 4px;
+        stroke-width: 10px;
       }
     </style>
   </defs>
