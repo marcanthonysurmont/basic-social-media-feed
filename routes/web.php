@@ -11,7 +11,7 @@ Route::get('/home', function (){
     return redirect('/');
 });
 
-Route::get('/status/{id}', [PostController::class, 'status'])->name('status');
+Route::get('/status/{id}', [PostController::class, 'status'])->name('status')->where('id', '[0-9]+');
 
 Route::middleware('auth')->group(function () {
     Route::get('/create-post', [PostController::class, 'create_post'])->name('create-post');
