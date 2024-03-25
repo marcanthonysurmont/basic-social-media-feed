@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
@@ -19,6 +20,16 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);           //Laten weten dat een post bij een User hoord
+    }
+
+    public function likedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'post_has_likes', 'post_id', 'user_id');
+    }
+
+    public function hasLiked(User $user): bool
+    {
+        return $this->likedByUsers()->where('user_id', $user->id)->exists();
     }
 }
 
