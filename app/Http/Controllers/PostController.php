@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use mysql_xdevapi\Exception;
 
 class PostController extends Controller
@@ -111,5 +112,29 @@ class PostController extends Controller
         }
 
         return redirect('/')->with('error', 'Post deleted');
+    }
+
+    function like(Request $request)
+    {
+        try
+        {
+            $post_id = $request->input('post_id');
+            $post = Post::findOrFail($post_id);
+            $user = Auth::user();
+
+            if(!$post->hasLiked($user))
+            {
+                $post->likedByUsers()->attach(Auth::id());
+            }else
+            {
+                $post->likedByUsers()->detach(Auth::id());
+            }
+
+            return redirect()->back();
+
+        }catch(ModelNotFoundException)
+        {
+            redirect('/login')->with('error', 'You need to be logged in for that');
+        }
     }
 }
