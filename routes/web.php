@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/edit-post/{id}', [PostController::class, 'update'])->name('edit-post.update');
     Route::delete('/edit-post/{id}', [PostController::class, 'delete'])->name('edit-post.delete');
 
+    Route::post('/', [PostController::class, 'like'])->name('home.like');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
