@@ -138,26 +138,4 @@ class PostController extends Controller
             return redirect('/login')->with('error', 'You need to be logged in for that');
         }
     }
-
-    function addComment(int $post_id, Request $request)
-    {
-        $request->validate([
-            'content' => 'required'
-        ]);
-
-        try
-        {
-            $comment = new Comment();
-            $comment->post_id = $post_id;
-            $comment->user_id = Auth::id();
-            $comment->comment = $request->input('content');
-            $comment->save();
-
-        }catch(ModelNotFoundException)
-        {
-            return redirect('/login')->with('error', 'You need to be logged in for that');
-        }
-
-        return redirect()->back();
-    }
 }
