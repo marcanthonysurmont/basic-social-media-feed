@@ -20,8 +20,12 @@
     </a>
 
     <div class="p-6 lg:pt-0 flex">
-        <a href="#" class="inline-block"><x-unfilled-heart></x-unfilled-heart></a>
-        <span class="text-gray-400 ml-3">0 likes</span>
+        <form method="POST" action="{{ route('home.like') }}">
+            @csrf
+            <input type="hidden" name="post_id" value="{{ $post->id }}">
+            <button class="inline-block" type="submit">@if($post->hasLiked(Auth::user()))<x-filled-heart></x-filled-heart>@else<x-unfilled-heart></x-unfilled-heart>@endif</button>
+        </form>
+        <span class="text-gray-400 ml-3">{{ $post->likedByUsers->count() }} likes</span>
 
         <x-comment-logo></x-comment-logo>
         <span class="text-gray-400 ml-3">0 comments</span>
