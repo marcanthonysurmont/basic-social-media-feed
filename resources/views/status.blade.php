@@ -27,19 +27,30 @@
 
             <!-- Comment Section -->
             <div class="mt-2 rounded-lg">
-                <h3 class="text-lg font-semibold mb-4">0 Comments</h3>
+                <h3 class="text-lg font-semibold mb-4">{{ $post->comments->count() }} Comments</h3>
                 <!-- Comment Form -->
-                <form action="" method="POST">
+                <form action="{{ route('status.comment', ['id' => $post->id]) }}" method="POST">
                     @csrf
-                    <textarea name="content" rows="3" class="w-full px-3 py-2 rounded-lg border-gray-300 focus:outline-none focus:border-indigo-500 mb-2" style="height: 5rem; resize: none;" placeholder="Add a comment..."></textarea>
-                    <button type="submit" class="bg-gray-100 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Post Comment</button>
+                    <textarea name="content" rows="3" class="w-full px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 @error('content')border-danger @enderror" style="height: 5rem; resize: none;" placeholder="Add a comment..."></textarea>
+                    @error('content')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    <button type="submit" class="bg-gray-100 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 mb-2">Post Comment</button>
                 </form>
-                <div class="w-full px-3 py-2 rounded-lg border-gray-300 mt-2">
-                    <div class="flex items-center">
-                        <p class="text-gray-800 font-semibold">John Doe</p> <!-- Commenter's name -->
+                @foreach($post->comments->reverse() as $comment)
+                    <div class="w-full px-3 py-2 bg-gray-100 rounded-lg mt-2 relative">
+                        @if($comment->user_id === Auth::id())
+                            <form method="POST" action="">
+                                <input type="hidden" name="delete" value="{{ $comment->id }}">
+                                <button type="submit" class="absolute top-0 right-0 transform p-4"><x-trash-can></x-trash-can></button>
+                            </form>
+                        @endif
+                        <div class="flex items-center">
+                            <p class="text-gray-800 font-semibold">{{ $comment->user->name }}</p> <!-- Commenter's name -->
+                        </div>
+                        <p class="text-gray-700" style="overflow-wrap: break-word;">{{ $comment->comment }}</p> <!-- Comment content -->
                     </div>
-                    <p class="text-gray-700">This is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> <!-- Comment content -->
-                </div>
+                @endforeach
             </div>
         </div>
         </div>
