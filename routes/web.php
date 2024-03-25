@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/', [PostController::class, 'like'])->name('home.like');
 
+    Route::post('/status/{id}', [PostController::class, 'addComment'])->name('status.comment');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
