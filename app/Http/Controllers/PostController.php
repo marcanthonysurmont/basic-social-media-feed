@@ -21,9 +21,9 @@ class PostController extends Controller
         try
         {
             $post = Post::findOrFail($id);
-        }catch (ModelNotFoundException $e)
+        }catch(ModelNotFoundException)
         {
-            redirect('/')->with('error', 'Post not found');
+            return redirect('/')->with('error', 'Post not found');
         }
 
         return view('/status', ['post' => $post]);
