@@ -15,30 +15,34 @@
             @if(!empty($post->file_path))
                 <img src="{{ asset('storage/' . $post->file_path) }}" alt="{{ $post->title }}" class="w-full h-auto mb-1">
             @endif
-        </div>
 
-        <div class="p-6 lg:pt-0 flex">
-            <a href="#" class="inline-block"><x-unfilled-heart></x-unfilled-heart></a>
-            <span class="text-gray-400 ml-3">0 likes</span>
-        </div>
+            <div class="mt-6 lg:pt-0 flex">
+                <form method="POST" action="{{ route('home.like') }}">
+                    @csrf
+                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                    <button class="inline-block" type="submit">@if($post->hasLiked(Auth::user()))<x-filled-heart></x-filled-heart>@else<x-unfilled-heart></x-unfilled-heart>@endif</button>
+                </form>
+                <span class="text-gray-400 ml-3">{{ $post->likedByUsers->count() }} likes</span>
+            </div>
 
-        <!-- Comment Section -->
-        <div class="p-6 rounded-lg">
-            <h3 class="text-lg font-semibold mb-4">0 Comments</h3>
-            <!-- Comment Form -->
-            <form action="" method="POST">
-                @csrf
-                <textarea name="content" rows="3" class="w-full px-3 py-2 rounded-lg border-gray-300 focus:outline-none focus:border-indigo-500 mb-2" style="height: 5rem; resize: none;" placeholder="Add a comment..."></textarea>
-                <button type="submit" class="bg-gray-100 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Post Comment</button>
-            </form>
-            <div class="w-full px-3 py-2 rounded-lg border-gray-300 mt-2">
-                <div class="flex items-center">
-                    <p class="text-gray-800 font-semibold">John Doe</p> <!-- Commenter's name -->
+            <!-- Comment Section -->
+            <div class="mt-2 rounded-lg">
+                <h3 class="text-lg font-semibold mb-4">0 Comments</h3>
+                <!-- Comment Form -->
+                <form action="" method="POST">
+                    @csrf
+                    <textarea name="content" rows="3" class="w-full px-3 py-2 rounded-lg border-gray-300 focus:outline-none focus:border-indigo-500 mb-2" style="height: 5rem; resize: none;" placeholder="Add a comment..."></textarea>
+                    <button type="submit" class="bg-gray-100 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Post Comment</button>
+                </form>
+                <div class="w-full px-3 py-2 rounded-lg border-gray-300 mt-2">
+                    <div class="flex items-center">
+                        <p class="text-gray-800 font-semibold">John Doe</p> <!-- Commenter's name -->
+                    </div>
+                    <p class="text-gray-700">This is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> <!-- Comment content -->
                 </div>
-                <p class="text-gray-700">This is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> <!-- Comment content -->
             </div>
         </div>
-    </div>
+        </div>
 </x-app-layout>
 
 
