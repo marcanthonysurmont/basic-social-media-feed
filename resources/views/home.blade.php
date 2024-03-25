@@ -1,5 +1,5 @@
 <x-app-layout>
-    @foreach ($posts as $post)
+    @foreach ($posts->reverse() as $post)
         <x-post-preview :post="$post" />
     @endforeach
 </x-app-layout>
