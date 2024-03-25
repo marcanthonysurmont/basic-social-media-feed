@@ -28,7 +28,7 @@
         <span class="text-gray-400 ml-3">{{ $post->likedByUsers->count() }} likes</span>
 
         <x-comment-logo></x-comment-logo>
-        <span class="text-gray-400 ml-3">0 comments</span>
+        <span class="text-gray-400 ml-3">{{ $post->comments->count() }} comments</span>
     </div>
 </div>
 
