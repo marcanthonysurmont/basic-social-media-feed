@@ -40,7 +40,9 @@
                 @foreach($post->comments->reverse() as $comment)
                     <div class="w-full px-3 py-2 bg-gray-100 rounded-lg mt-2 relative">
                         @if($comment->user_id === Auth::id())
-                            <form method="POST" action="">
+                            <form method="POST" action="{{ route('status.delete', ['id' => $post->id]) }}">
+                                @csrf
+                                @method('DELETE')
                                 <input type="hidden" name="delete" value="{{ $comment->id }}">
                                 <button type="submit" class="absolute top-0 right-0 transform p-4"><x-trash-can></x-trash-can></button>
                             </form>
