@@ -4,8 +4,8 @@
 <div class="block max-w-[877px] mx-auto bg-white text-gray-800 rounded-lg overflow-hidden shadow-lg relative">
     <a href="{{ route('status', ['id' => $post->id]) }}" class="block z-50"> <!-- Make sure the <a> tag wraps around the entire block -->
         <div class="p-6 relative">
-            <p class="text-sm font-semibold text-gray-400 mb-1">{{ $post->user->name }}</p>
-            <h2 class="text-xl font-semibold mb-4">{{ $post->title }}</h2>
+            <p class="text-sm font-semibold text-gray-400 mb-1" style="word-break: break-word">{{ $post->user->name }}</p>
+            <h2 class="text-xl font-semibold mb-4" style="word-break: break-word">{{ $post->title }}</h2>
             @if(Auth::id() === $post->user_id)
                 <div class="absolute top-0 right-0 transform p-4">
                     <a href="{{ route('edit-post', ['id' => $post->id]) }}"><x-edit-logo></x-edit-logo></a>

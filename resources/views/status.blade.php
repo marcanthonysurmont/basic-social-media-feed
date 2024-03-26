@@ -2,8 +2,8 @@
     <br>
     <div class="block max-w-[877px] mx-auto bg-white text-gray-800 rounded-lg overflow-hidden shadow-lg relative">
         <div class="p-6 relative">
-            <p class="text-sm font-semibold text-gray-400 mb-1">{{ $post->user->name }}</p>
-            <h2 class="text-xl font-bold mb-2">{{ $post->title }}</h2>
+            <p class="text-sm font-semibold text-gray-400 mb-1" style="word-break: break-word">{{ $post->user->name }}</p>
+            <h2 class="text-xl font-bold mb-2" style="word-break: break-word">{{ $post->title }}</h2>
             <p class="text-lg text-gray-700 mb-2" style="overflow-wrap: break-word;">{{ $post->content }}</p>
 
             @if(Auth::id() === $post->user_id)
@@ -48,7 +48,7 @@
                             </form>
                         @endif
                         <div class="flex items-center">
-                            <p class="text-gray-800 font-semibold">{{ $comment->user->name }}</p> <!-- Commenter's name -->
+                            <p class="text-gray-800 font-semibold" style="word-break: break-word">{{ $comment->user->name }}</p> <!-- Commenter's name -->
                         </div>
                         <p class="text-gray-700" style="overflow-wrap: break-word;">{{ $comment->comment }}</p> <!-- Comment content -->
                     </div>
