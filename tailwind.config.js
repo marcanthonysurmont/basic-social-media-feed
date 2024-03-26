@@ -10,7 +10,9 @@ export default {
         './resources/**/*.blade.php',
         './resources/**/*.js',
         './resources/**/*.vue',
-        './node_modules/tw-elements/js/**/*.js'
+        './node_modules/tw-elements/js/**/*.js',
+        './resources/views/*.blade.php',
+        "./resources/**/**/**/**/*.blade.php",
     ],
     theme: {
         extend: {
