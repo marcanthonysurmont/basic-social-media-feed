@@ -19,6 +19,9 @@
                         <x-nav-link :href="route('create-post')" :active="request()->routeIs('create-post')">
                             {{ __('Create post') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('my-posts')" :active="request()->routeIs('my-posts')">
+                            {{ __('My posts') }}
+                        </x-nav-link>
                     @endauth
                 </div>
             </div>
