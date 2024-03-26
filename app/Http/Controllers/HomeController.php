@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $posts = Post::simplePaginate(10);
+        $posts = Post::orderBy('id', 'desc')->simplePaginate(10);
 
         return view('home', ['posts' => $posts]);
     }
