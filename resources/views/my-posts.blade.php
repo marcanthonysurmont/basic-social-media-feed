@@ -3,7 +3,7 @@
         <h1 class="text-xl font-bold text-center text-gray-800 pt-6">{{ $posts->links()->paginator->total() }} Posts</h1>
     </div>
     <div class="grid lg:grid-cols-3 grid-cols-2 gap-4 max-w-[877px] mx-auto pt-8">
-        @foreach($posts->reverse() as $post)
+        @foreach($posts as $post)
             <div class="bg-white text-gray-800 rounded-lg overflow-hidden shadow-lg relative">
                 <a href="{{ route('status', ['id' => $post->id]) }}" class="block z-50 link-style"> <!-- Apply the link style class -->
                     <div class="p-4"> <!-- Adjust the height as per your requirement -->
