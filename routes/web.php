@@ -17,6 +17,8 @@ Route::get('/status/{id}', [PostController::class, 'status'])->name('status')->w
 Route::post('/create-post', [PostController::class, 'store'])->name('create-post.store');
 
 Route::get('/my-posts', [PostController::class, 'getUserPosts'])->name('my-posts');
+Route::get('/my-posts/recently-deleted', [PostController::class, 'recently_deleted'])->name('recently-deleted');
+Route::get('/my-posts/recently-deleted/{id}', [PostController::class, 'restore'])->name('recently-deleted.restore');
 
 Route::post('/edit-post/{id}', [PostController::class, 'update'])->name('edit-post.update');
 Route::delete('/edit-post/{id}', [PostController::class, 'delete'])->name('edit-post.delete');
