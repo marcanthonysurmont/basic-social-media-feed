@@ -2,7 +2,7 @@
     <br>
     <div class="block max-w-[877px] mx-auto bg-white text-gray-800 rounded-lg overflow-hidden shadow-lg relative">
         <div class="p-6 relative">
-            <p class="text-sm font-semibold text-gray-400 mb-1" style="word-break: break-word">{{ $post->user->name }}</p>
+            <p class="text-sm font-semibold text-gray-400 mb-1" style="word-break: break-word">{{ $post->user->name }} • {{ \App\Helpers::timeAgo($post->created_at) }}</p>
             <h2 class="text-xl font-bold mb-2" style="word-break: break-word">{{ $post->title }}</h2>
             <p class="text-lg text-gray-700 mb-2" style="overflow-wrap: break-word;">{{ $post->content }}</p>
 

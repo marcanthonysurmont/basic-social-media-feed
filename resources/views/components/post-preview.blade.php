@@ -4,7 +4,7 @@
 <div class="block max-w-[877px] mx-auto bg-white text-gray-800 rounded-lg overflow-hidden shadow-lg relative">
     <a href="{{ route('status', ['id' => $post->id]) }}" class="block z-50"> <!-- Make sure the <a> tag wraps around the entire block -->
         <div class="p-6 relative">
-            <p class="text-sm font-semibold text-gray-400 mb-1" style="word-break: break-word">{{ $post->user->name }}</p>
+            <p class="text-sm font-semibold text-gray-400 mb-1" style="word-break: break-word">{{ $post->user->name }} • {{ \App\Helpers::timeAgo($post->created_at) }}</p>
             <h2 class="text-xl font-semibold mb-4" style="word-break: break-word">{{ $post->title }}</h2>
             @if(Auth::id() === $post->user_id)
                 <div class="absolute top-0 right-0 transform p-4">
