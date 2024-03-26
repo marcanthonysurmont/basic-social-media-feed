@@ -11,6 +11,10 @@ class CommentController extends Controller
 {
     function add(int $post_id, Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/login')->with('error', 'You need to be logged in for that');
+        }
+
         $request->validate([
             'content' => 'required'
         ]);
@@ -28,7 +32,7 @@ class CommentController extends Controller
             return redirect('/login')->with('error', 'You need to be logged in for that');
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Comment added');
     }
 
     function delete(Request $request)
@@ -44,6 +48,6 @@ class CommentController extends Controller
             return redirect('/login')->with('error', 'You need to be logged in for that');
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Comment deleted');
     }
 }
