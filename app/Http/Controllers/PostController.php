@@ -54,7 +54,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect('home')->with('success', 'Post created');
+        return redirect('/')->with('success', 'Post created');
     }
 
     function edit(int $id)
@@ -98,7 +98,7 @@ class PostController extends Controller
             return redirect('/')->with('error', 'Post not found');
         }
 
-        return redirect()->with('success', 'Post edited');
+        return redirect()->back()->with('success', 'Post edited');
     }
 
     function delete(int $id, Request $request)
@@ -120,6 +120,10 @@ class PostController extends Controller
     {
         try
         {
+            if (!Auth::check()) {
+                return redirect('/login')->with('error', 'You need to be logged in for that');
+            }
+
             $post_id = $request->input('post_id');
             $post = Post::findOrFail($post_id);
             $user = Auth::user();
@@ -145,7 +149,7 @@ class PostController extends Controller
         try
         {
             $user = User::findOrFail(Auth::id());
-            $userPosts = $user->posts()->paginate(18);
+            $userPosts = $user->posts()->orderBy('id', 'desc')->paginate(18);
 
         }catch(ModelNotFoundException)
         {
