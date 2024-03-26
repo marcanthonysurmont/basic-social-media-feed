@@ -6,6 +6,7 @@ use App\Models\Comment;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use mysql_xdevapi\Exception;
@@ -15,7 +16,7 @@ class PostController extends Controller
     public function create_post()
     {
         $submitButton = 'Create Post';
-        return view('/post', compact('submitButton'));
+        return view('post', compact('submitButton'));
     }
 
     public function status(int $id)
@@ -28,7 +29,7 @@ class PostController extends Controller
             return redirect('/')->with('error', 'Post not found');
         }
 
-        return view('/status', ['post' => $post]);
+        return view('status', ['post' => $post]);
     }
 
 
@@ -36,7 +37,7 @@ class PostController extends Controller
     {
         $request->validate([
             'file' => 'file|max:10240',
-            'title' => 'required',
+            'title' => 'required|max:255',
             'content' => 'required'
         ]);
 
@@ -53,10 +54,10 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect('/home')->with('success', 'Post created');
+        return redirect('home')->with('success', 'Post created');
     }
 
-    function edit_post(int $id)
+    function edit(int $id)
     {
         try
         {
@@ -67,14 +68,14 @@ class PostController extends Controller
         {
             return redirect('/')->with('error', 'Post not found');
         }
-        return view('/post', ['post' => $post], compact('submitButton'));
+        return view('post', ['post' => $post], compact('submitButton'));
     }
 
     function update(int $id, Request $request)
     {
         $request->validate([
             'file' => 'file|max:10240',
-            'title' => 'required',
+            'title' => 'required|max:255',
             'content' => 'required'
         ]);
 
@@ -97,7 +98,7 @@ class PostController extends Controller
             return redirect('/')->with('error', 'Post not found');
         }
 
-        return redirect('/')->with('success', 'Post edited');
+        return redirect()->with('success', 'Post edited');
     }
 
     function delete(int $id, Request $request)
@@ -137,5 +138,20 @@ class PostController extends Controller
         {
             return redirect('/login')->with('error', 'You need to be logged in for that');
         }
+    }
+
+    function getUserPosts()
+    {
+        try
+        {
+            $user = User::findOrFail(Auth::id());
+            $userPosts = $user->posts()->paginate(18);
+
+        }catch(ModelNotFoundException)
+        {
+            return redirect('/login')->with('error', 'You need to be logged in for that');
+        }
+
+        return view('my-posts', ['posts' => $userPosts]);
     }
 }
