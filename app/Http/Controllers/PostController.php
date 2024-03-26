@@ -149,7 +149,7 @@ class PostController extends Controller
         try
         {
             $user = User::findOrFail(Auth::id());
-            $userPosts = $user->posts()->orderBy('id', 'desc')->paginate(18);
+            $userPosts = $user->posts()->orderBy('id', 'desc')->paginate(15);
 
         }catch(ModelNotFoundException)
         {
@@ -157,5 +157,35 @@ class PostController extends Controller
         }
 
         return view('my-posts', ['posts' => $userPosts]);
+    }
+
+    function recently_deleted()
+    {
+        try
+        {
+            $user = User::findOrFail(Auth::id());
+            $userPosts = $user->posts()->onlyTrashed()->orderBy('id', 'desc')->paginate(18);
+
+        }catch(ModelNotFoundException)
+        {
+            return redirect('/login')->with('error', 'You need to be logged in for that');
+        }
+
+        return view('recently-deleted', ['posts' => $userPosts]);
+    }
+
+    function restore(int $id)
+    {
+        try
+        {
+            $post = Post::withTrashed()->findOrFail($id);
+            $post->restore();
+            
+        }catch(ModelNotFoundException)
+        {
+            return redirect('/login')->with('error', 'You need to be logged in for that');
+        }
+
+        return redirect('my-posts');
     }
 }
