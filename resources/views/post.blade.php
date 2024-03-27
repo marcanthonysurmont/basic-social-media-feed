@@ -9,7 +9,7 @@
                         <label class="block text-gray-800 text-lg font-bold mb-2" for="title">
                             Title
                         </label>
-                        <input class="shadow appearance-none rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline bg-gray-100 @error('title')border-danger @enderror" id="title" name="title" type="text" value="@if(isset($post)){{ $post->title }}@endif{{ old('title') }}">
+                        <input class="shadow appearance-none rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline bg-gray-100 @error('title')border-danger @enderror" id="title" name="title" type="text" value="{{ isset($post) ? old('title', $post->title) : old('title')}}">
                         @error('title')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -19,7 +19,7 @@
                         <label class="block text-gray-800 text-lg font-bold mb-2" name="content">
                             Content:
                         </label>
-                        <textarea class="shadow appearance-none rounded w-full max-h-32 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline bg-gray-100 resize-none @error('content')border-danger @enderror" id="content" name="content" rows="6">@if(isset($post)){{ $post->content }}@endif{{ old('content') }}</textarea>
+                        <textarea class="shadow appearance-none rounded w-full max-h-32 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline bg-gray-100 resize-none @error('content')border-danger @enderror" id="content" name="content" rows="6">{{ isset($post) ? old('content', $post->content) : old('content')}}</textarea>
                         @error('content')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
