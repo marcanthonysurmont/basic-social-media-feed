@@ -3,5 +3,5 @@
 @tailwind utilities;
 @font-face {
     font-family: VeniteAdoremusStraight;
-    src: url('/public/build/assets/Venite Adoremus Straight.otf') format('otf');
+    src: url('/public/build/assets/Venite Adoremus Straight.otf') format('opentype');
 }
