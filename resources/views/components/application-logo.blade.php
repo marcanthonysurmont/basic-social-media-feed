@@ -3,7 +3,7 @@
     <style>
         @font-face {
             font-family: 'VeniteAdoremusStraight';
-            src: url('/resources/fonts/Venite Adoremus Straight.otf') format('opentype');
+            src: url('/resources/fonts/VeniteAdoremusStraight.otf') format('opentype');
         }
       .cls-1 {
         fill: none;
