@@ -61,7 +61,8 @@ class PostController extends Controller
     {
         try
         {
-           $post = Post::findOrFail($id);
+           $user = Auth::user();
+           $post = $user->posts()->findOrFail($id);
            $submitButton = 'Edit Post';
 
         }catch (ModelNotFoundException $e)
@@ -81,8 +82,8 @@ class PostController extends Controller
 
         try
         {
-
-            $post = Post::findOrFail($id);
+            $user = Auth::user();
+            $post = $user->posts()->findOrFail($id);
             $post->title = $request->input('title');
             $post->content = $request->input('content');
 
@@ -105,7 +106,8 @@ class PostController extends Controller
     {
         try
         {
-            $post = Post::findOrFail($id);
+            $user = Auth::user();
+            $post = $user->posts()->findOrFail($id);
             $post->delete();
 
         }catch(ModelNotFoundException $e)
@@ -178,9 +180,10 @@ class PostController extends Controller
     {
         try
         {
-            $post = Post::withTrashed()->findOrFail($id);
+            $user = Auth::user();
+            $post = $user->posts()->withTrashed()->findOrFail($id);
             $post->restore();
-            
+
         }catch(ModelNotFoundException)
         {
             return redirect('/login')->with('error', 'You need to be logged in for that');
