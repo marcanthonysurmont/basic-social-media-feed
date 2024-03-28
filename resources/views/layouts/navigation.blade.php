@@ -69,6 +69,16 @@
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
+
+            @auth
+                <x-responsive-nav-link :href="route('create-post')" :active="request()->routeIs('create-post')">
+                    {{ __('Create post') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('my-posts')" :active="request()->routeIs('my-posts')">
+                    {{ __('My posts') }}
+                </x-responsive-nav-link>
+            @endauth
+
             @guest
                 <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
                     {{ __('Login') }}
